@@ -3,7 +3,7 @@ from tensorflow.keras.callbacks import LambdaCallback, Callback
 from tensorflow.keras import backend as K
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-
+from Scheduler import *
 
 class One_Cycle(Callback):
     '''
@@ -63,7 +63,7 @@ class One_Cycle(Callback):
         self.steps_phase1 = num_steps * len_phase1
         self.steps_phase2 = num_steps - self.steps_phase1
         
-        #on instancie les phases
+        #phase instantiation
         self.phases = [[Scheduler(self.lr_min, lr_max, self.steps_phase1, function), Scheduler(self.mom_max, self.mom_min, self.steps_phase1, function)], 
                  [Scheduler(lr_max, self.final_lr, self.steps_phase2, function), Scheduler(self.mom_min, self.mom_max, self.steps_phase2, function)]]
     
@@ -71,7 +71,7 @@ class One_Cycle(Callback):
         
     def on_train_begin(self, logs = None):
         '''
-        Instancie le début de l'entrainement
+        Instancies the beginning of training
         '''
         self.reset()
         
@@ -89,35 +89,36 @@ class One_Cycle(Callback):
         
     def on_train_batch_end(self, batch, logs = None):
         '''
-        Update le LR, le momentum et la phase.
+        Update the lr, the momentum and the phase.
         '''
-        #update la step
+        #updating step
         self.step += 1
         if self.step > self.steps_phase1:
             self.phase = 1
             
-        #on update le learning rate et le momentum
+        #updating learning rate and momentum
         new_lr, new_mom = self.update_parameters()
             
-        #affecte le nouveau lr et mom au modèle
+        #assigns the new lr and mom to the model
         K.set_value(self.model.optimizer.learning_rate, new_lr)         
         self.set_momentum(new_mom)
         
         
     def reset(self):
         '''
-        reset les paramètres pour un nouvel entrainement
+        reset the parameters
         
-        - self.step : l'itération actuelle
-        - self.phase : l'une des phases du OneCycle
-        - self.lrs : liste contenant les différents learning rate
-        - self.moms : liste contenant les différents momentum 
+        - self.step : int. Actual iteration
+        - self.phase : int. Phase of the training
+        - self.lrs : list.  List of the learning rates
+        - self.moms : list. List of the momentums (or beta_1)
         '''
         self.step = 0
         self.phase = 0
         self.lrs = []
         self.moms = []
-        
+    
+    
     def update_parameters(self):
         '''
         Cosine update le momentum et le lr
@@ -129,11 +130,16 @@ class One_Cycle(Callback):
         lr = self.phases[self.phase][0].step()
         mom = self.phases[self.phase][1].step()
         
-        return lr, mom
+    
+    return lr, mom
 
     def get_momentum(self):
         '''
         Get the value of the momemtum or beta_1 of the optimizer if it exists
+        
+        Outputs:
+        - mom_name : str. Name of the parameters
+        - mom/beta_1 : float. pass if there is no momentum or beta_1 in the optimizer
         '''
         
         #momentum
@@ -153,10 +159,14 @@ class One_Cycle(Callback):
         except AttributeError:
             self._moms = False
             pass
-            
+    
+    
     def set_momentum(self, new_mom):
         '''
         Modify the value of the momentum in the model
+        
+        Input:
+        - new_mom : float. The value of the momentum (or beta_1)
         '''
         
         #momentum
@@ -174,6 +184,9 @@ class One_Cycle(Callback):
         
         
     def plot(self):
+        '''
+        Plot the evolution of the learning rate and the momentum or beta_1 if it exists
+        '''
         
         if self._moms :
             fig = make_subplots(rows=1, cols=2)       
