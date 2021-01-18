@@ -43,5 +43,5 @@ There is a small example of comparison between an OCP againt a classical trainin
 [1] [A DISCIPLINED APPROACH TO NEURAL NETWORK HYPER-PARAMETERS: PART 1 – LEARNING RATE, BATCH SIZE, MOMENTUM, AND WEIGHT DECAY](https://arxiv.org/pdf/1803.09820.pdf)  
 [2] [https://github.com/titu1994/keras-one-cycle](https://github.com/titu1994/keras-one-cycle/tree/06c202996d71491e624ddef53a57858152e93564)  
 [3] [https://github.com/titu1994/keras-one-cycle/](https://github.com/titu1994/keras-one-cycle/tree/06c202996d71491e624ddef53a57858152e93564)  
-[4] [Super-convergence in Tensorflow 2 with the 1Cycle Policy](https://www.avanwyk.com/tensorflow-2-super-convergence-with-the-1cycle-policy/)
+[4] [Super-convergence in Tensorflow 2 with the 1Cycle Policy](https://www.avanwyk.com/tensorflow-2-super-convergence-with-the-1cycle-policy/)  
 [5] [The 1cycle policy](https://sgugger.github.io/the-1cycle-policy.html)
