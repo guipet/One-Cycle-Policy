@@ -38,3 +38,7 @@ This is an example of OCP with a cosine evolution
 
 There is a small example of comparison between an OCP againt a classical training
 ![alttext](https://github.com/guipet/One-Cycle-Policy/blob/main/plots/plot_eval.png) 
+
+# References
+[1] [A DISCIPLINED APPROACH TO NEURAL NETWORK HYPER-PARAMETERS: PART 1 – LEARNING RATE, BATCH SIZE, MOMENTUM, AND WEIGHT DECAY](https://arxiv.org/pdf/1803.09820.pdf)  
+[2] [This Github](https://github.com/titu1994/keras-one-cycle/tree/06c202996d71491e624ddef53a57858152e93564)
