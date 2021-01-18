@@ -12,6 +12,8 @@ OCP is a way to train a model. Instead of keeping a fixed learning rate and a fi
 
 **One_Cycle.py**: It is a class based on the *Callback class* of Tensorflow. It uses **Scheduler.py** to schedule the learning rate. It is a callback that allows a model to train with the OCP. At the end of the training, you can plot the evolution of the parameters.
 
+**Be careful**! To get the most out of the OCP, it is important to pay attention to a lot of hyperparameters like the range of the learning rate, the batch size, the weight decay. These hyperparameters vary a lot from a problem to another because of the architecture of the network, the data, the weights...
+
 # Prerequisites
 - Tensorflow version 2.5.0 or more recent.
 - Numpy version 1.19.4 or more recent.
@@ -32,6 +34,7 @@ OCP is a way to train a model. Instead of keeping a fixed learning rate and a fi
 
 # Result
 This is an example of OCP with a cosine evolution
-
+![alttext](https://github.com/guipet/One-Cycle-Policy/blob/main/plots/lr%26mom.png)
 
 There is a small example of comparison between an OCP againt a classical training
+![alttext](https://github.com/guipet/One-Cycle-Policy/blob/main/plots/plot_eval.png) 
