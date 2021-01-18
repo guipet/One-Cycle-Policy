@@ -3,6 +3,8 @@ from tensorflow.keras.callbacks import LambdaCallback, Callback
 from tensorflow.keras import backend as K
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import numpy as np
+
 from Scheduler import *
 
 class One_Cycle(Callback):
@@ -18,7 +20,7 @@ class One_Cycle(Callback):
     From Leslie Smith's paper (https://arxiv.org/pdf/1803.09820.pdf)
     '''
     
-    def __init__(self, lr_max, epochs = None, batch_size = None, moms = (0.95, 0.85), div_factor = 25., 
+    def __init__(self, lr_max, epochs, batch_size, moms = (0.95, 0.85), div_factor = 25., 
                  len_phase1 = 0.3, func = 'cosine', ann = True):
         '''        
         Inputs :
@@ -37,13 +39,6 @@ class One_Cycle(Callback):
         self.mom_max  = moms[0] 
         self.mom_min  = moms[1]
         self._moms = True
-
-        
-        if batch_size is None:
-            raise ValueError("must provide a value to batche_size")
-        
-        if epochs is None: 
-            raise ValueError("must provide a value to epochs")
         
         if dico.get(func, None) is None:
             raise ValueError(str(func) + " doesn't exist. Choose between linear, cosine or exp.")
