@@ -33,7 +33,7 @@ OCP is a way to train a model. Instead of keeping a fixed learning rate and a fi
 - `ann`: Boolean that informs if we want to anneal the learning rate at the end of the training. *Default* : True
 
 # Result
-This is an example of OCP with a cosine evolution
+With **OneCycle.ipynb**, we can use the notebook to produce some examples with the class. This is an example of OCP with a cosine evolution
 ![alttext](https://github.com/guipet/One-Cycle-Policy/blob/main/plots/lr%26mom.png)
 
 There is a small example of comparison between an OCP againt a classical training
