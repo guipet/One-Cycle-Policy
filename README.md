@@ -20,9 +20,10 @@ OCP is a way to train a model. Instead of keeping a fixed learning rate and a fi
 - Plotly version 4.14.1 or more recent.
 
 # Parameters 
-`class One_Cycle(lr_max, epochs = None, batch_size = None, moms = (0.95, 0.85), div_factor = 25., 
+```py
+class One_Cycle(lr_max, epochs, batch_size, moms = (0.95, 0.85), div_factor = 25., 
                  len_phase1 = 0.3, func = 'cosine', ann = True)`
-
+```
 - `lr_max` : Maximal bound of the learning rate.
 - `epochs` : Number of epochs to train the model.
 - `batch_size` : Batch size. 
